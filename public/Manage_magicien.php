@@ -22,7 +22,7 @@ class Manage_magicien {
 
     public function addMagicien(string $nom){
         $db = $this->db;
-        $query = "INSERT INTO `magiciens` (`idCli`, `nom`, `hp`, `attack`, `defence`, `mana`) VALUES (NULL, :nom, :hp, :attack, :defence, :mana)";
+        $query = "INSERT INTO `magiciens` (`id`, `nom`, `hp`, `attack`, `defence`, `mana`) VALUES (NULL, :nom, :hp, :attack, :defence, :mana)";
 
         $req = $db->prepare($query);
         

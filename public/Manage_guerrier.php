@@ -22,7 +22,7 @@ class Manage_guerrier {
 
     public function addGuerrier(string $nom){
         $db = $this->db;
-        $query = "INSERT INTO `guerriers` (`idCli`, `nom`, `hp`, `attack`, `defence`) VALUES (NULL, :nom, :hp, :attack, :defence)";
+        $query = "INSERT INTO `guerriers` (`id`, `nom`, `hp`, `attack`, `defence`) VALUES (NULL, :nom, :hp, :attack, :defence)";
 
         $req = $db->prepare($query);
         
