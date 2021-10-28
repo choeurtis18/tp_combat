@@ -11,15 +11,17 @@
 <body>
   <div class="container">
     <h1>Wizard VS Warrior</h1>
-    <h2>Veuillez entrer le nom de votre personnage et renseigner son type.</h2>
+    <h2>Créez votre personnage !</h2>
 
     <form action="index.php" method="POST">
-      <p>Donnez un nom à votre personnage</p>
-      <input type="text" name="nomPerso">
-      <div class="typeBtn">
-        <p>Choisissez le type de votre personnage</p>
+      <div class="step typeBtn">
+        <label for="type">Spécifiez son type</label>
         <input type="radio" name="type" value="guerrier">Guerrier
         <input type="radio" name="type" value="magicien">Magicien
+      </div>
+      <div class="step">
+        <label for="nomPerso">Donnez lui un nom</label>
+        <input type="text" name="nomPerso">
       </div>
       <button name="submit">Créer un personnage</button>
     </form>
