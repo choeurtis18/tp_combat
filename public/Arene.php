@@ -12,13 +12,3 @@
 </html>
 
 <?php
-
-if (isset( $_POST['submit'] ) ) {
-  $nomPerso = $_POST['nomPerso'];
-  $radioBtn = $_POST['radioBtn'];
-}
-
-echo 'type : ' . $radioBtn . '</br>';
-echo 'Nom : ' . $nomPerso ;
-
-?>
