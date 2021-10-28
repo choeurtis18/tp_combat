@@ -1,7 +1,5 @@
 <?php
 
-use function PHPSTORM_META\type;
-
 spl_autoload_register(function($className){
     require $className.".php";
 });
@@ -9,16 +7,12 @@ spl_autoload_register(function($className){
 class Manage_personnage {
     private $db;
 
-    public function __construct(PDO $db)
-    {
+    public function __construct(PDO $db){
         $this->setDb($db);
     }
 
-
-    public function setDb($db)
-    {
+    public function setDb($db){
         $this->db = $db;
-
         return $this;
     }
 
@@ -29,7 +23,7 @@ class Manage_personnage {
             $query = "INSERT INTO `magiciens` (`id`, `nom`, `hp`, `attack`, `defence`, `type`, `mana`) VALUES (NULL, :nom, :hp, :attack, :defence, :mana)";
             $req = $db->prepare($query);
         
-            if(!verifNom($nom)) {
+            if(!$this->verifNom($nom, $type)) {
                 $req->bindValue(':nom', $nom);
                 $req->bindValue(':hp', 100);
                 $req->bindValue(':attack', random_int(5, 10));
@@ -39,7 +33,7 @@ class Manage_personnage {
 
                 
                 $req->execute();
-                return "creation ".$nom;
+                return "creation magicien : ".$nom;
             }else {
                 return "ce magicien existe déjà";
             }
@@ -47,7 +41,7 @@ class Manage_personnage {
             $query = "INSERT INTO `guerriers` (`id`, `nom`, `hp`, `attack`, `defence`, `type`) VALUES (NULL, :nom, :hp, :attack, :defence)";
             $req = $db->prepare($query);
         
-            if(!verifNom($nom)) {
+            if(!$this->verifNom($nom, $type)) {
                 $req->bindValue(':nom', $nom);
                 $req->bindValue(':hp', 100);
                 $req->bindValue(':attack', random_int(20, 40));
@@ -56,13 +50,12 @@ class Manage_personnage {
 
                 
                 $req->execute();
-                return "creation ".$nom;
+                return "creation guerrier : ".$nom;
             }else {
                 return "ce gerrier existe déjà";
             }
         }
-        
-        
+
     }
 
     public function getPersonnages(){
@@ -78,41 +71,52 @@ class Manage_personnage {
             }elseif($row['type'] == "guerrier"){
                 $personnage = new Guerrier($row);
             }
-            
+            var_dump($personnage);
             $personnages[] = $personnage;
         };
         
         return $personnages;
     }
 
-    private function verifNom($nom, $type) {
-		/*** accès au model ***/
+    public function deletePersonnage($ID){
+        /*** accès au model ***/
+        $bdd = $this->bdd;
+        $query = "DELETE FROM personnage WHERE id = :ID";
+
+        $req = $bdd->prepare($query);
+        $req->bindValue(':ID', $ID, PDO::PARAM_INT);
+
+        $req->execute();
+    }
+
+    function verifNom($nom, $type) {
+        /*** accès au model ***/
         $db = $this->db;
         $query = "";
         
         if($type == "magicien"){
-		    $query="SELECT * FROM magiciens WHERE nom = :nom ";
+            $query="SELECT * FROM magiciens WHERE nom = :nom ";
         } elseif ($type == "guerrier"){
             $query="SELECT * FROM guerriers WHERE nom = :nom ";
         }
-		
-		//verifie si le nom existe
-		try {
-			$req = $db->prepare($query);
-			$req->bindValue(':nom', $nom, PDO::PARAM_INT);
-			$bool = $req->execute();
-			if ($bool) {
-				$resultat = $req->fetchAll(PDO::FETCH_ASSOC); 
-			}
-		}
-		catch (PDOException $e) {
-			echo utf8_encode("Echec de select nom Ajout : " . $e->getMessage() . "\n");
-		}		
-
-		
-		if(count($resultat) == 0) return false;
-		else return true;
-	}
+        
+        //verifie si le nom existe
+        try {
+            $req = $db->prepare($query);
+            $req->bindValue(':nom', $nom, PDO::PARAM_INT);
+            $bool = $req->execute();
+            if ($bool) {
+                $resultat = $req->fetchAll(PDO::FETCH_ASSOC); 
+            }
+        }
+        catch (PDOException $e) {
+            echo utf8_encode("Echec de select nom Ajout : " . $e->getMessage() . "\n");
+        }		
+    
+        
+        if(count($resultat) == 0) return false;
+        else return true;
+    }
 }
 
 ?>
