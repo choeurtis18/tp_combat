@@ -4,6 +4,23 @@
 }
 
 body {
-  background: #232323;
+  /* background: #232323; */
+  background: url(../img3.jpeg);
   color: #fff;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+}
+
+.container {
+  width: 45%;
+  background: rgb(0,0,0,0.5);
+  padding: 2.5rem;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 1rem;
 }
