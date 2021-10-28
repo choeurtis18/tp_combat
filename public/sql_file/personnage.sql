@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : db
--- Généré le : mer. 27 oct. 2021 à 20:48
+-- Généré le : jeu. 28 oct. 2021 à 07:45
 -- Version du serveur : 10.6.4-MariaDB-1:10.6.4+maria~focal
 -- Version de PHP : 7.4.25
 
@@ -24,30 +24,17 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `guerriers`
+-- Structure de la table `personnage`
 --
 
-CREATE TABLE `guerriers` (
-  `id` int(11) NOT NULL,
-  `nom` varchar(30) NOT NULL,
-  `hp` int(11) NOT NULL,
-  `attack` int(11) NOT NULL,
-  `defence` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `magiciens`
---
-
-CREATE TABLE `magiciens` (
-  `id` int(11) NOT NULL,
+CREATE TABLE `personnage` (
+  `ID` int(11) NOT NULL,
   `nom` varchar(30) NOT NULL,
   `hp` int(11) NOT NULL,
   `attack` int(11) NOT NULL,
   `defence` int(11) NOT NULL,
-  `mana` int(50) NOT NULL
+  `type` varchar(30) NOT NULL,
+  `mana` int(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -55,32 +42,20 @@ CREATE TABLE `magiciens` (
 --
 
 --
--- Index pour la table `guerriers`
+-- Index pour la table `personnage`
 --
-ALTER TABLE `guerriers`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `magiciens`
---
-ALTER TABLE `magiciens`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `personnage`
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT pour la table `guerriers`
+-- AUTO_INCREMENT pour la table `personnage`
 --
-ALTER TABLE `guerriers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `magiciens`
---
-ALTER TABLE `magiciens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `personnage`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
