@@ -20,7 +20,7 @@ class Manage_personnage {
         $db = $this->db;
 
         if($type == "magicien"){
-            $query = "INSERT INTO `magiciens` (`id`, `nom`, `hp`, `attack`, `defence`, `type`, `mana`) VALUES (NULL, :nom, :hp, :attack, :defence, :mana)";
+            $query = "INSERT INTO `personnage` (`id`, `nom`, `hp`, `attack`, `defence`, `type`, `mana`) VALUES (NULL, :nom, :hp, :attack, :defence, :typee, :mana)";
             $req = $db->prepare($query);
         
             if(!$this->verifNom($nom, $type)) {
@@ -28,8 +28,8 @@ class Manage_personnage {
                 $req->bindValue(':hp', 100);
                 $req->bindValue(':attack', random_int(5, 10));
                 $req->bindValue(':defence', 0);
-                $req->bindValue(':type', 'magicien');
-                $req->bindValue(':mana', random_int(15000, 30000));
+                $req->bindValue(':typee', 'magicien');
+                $req->bindValue(':mana', random_int(15, 30));
 
                 
                 $req->execute();
@@ -38,7 +38,7 @@ class Manage_personnage {
                 return "ce magicien existe déjà";
             }
         }elseif ($type == "guerrier"){
-            $query = "INSERT INTO `guerriers` (`id`, `nom`, `hp`, `attack`, `defence`, `type`) VALUES (NULL, :nom, :hp, :attack, :defence)";
+            $query = "INSERT INTO `personnage` (`id`, `nom`, `hp`, `attack`, `defence`, `type`) VALUES (NULL, :nom, :hp, :attack, :defence, :typee)";
             $req = $db->prepare($query);
         
             if(!$this->verifNom($nom, $type)) {
@@ -46,7 +46,7 @@ class Manage_personnage {
                 $req->bindValue(':hp', 100);
                 $req->bindValue(':attack', random_int(20, 40));
                 $req->bindValue(':defence', random_int(10, 19));
-                $req->bindValue(':type', 'guerrier');
+                $req->bindValue(':typee', 'guerrier');
 
                 
                 $req->execute();
@@ -94,11 +94,7 @@ class Manage_personnage {
         $db = $this->db;
         $query = "";
         
-        if($type == "magicien"){
-            $query="SELECT * FROM magiciens WHERE nom = :nom ";
-        } elseif ($type == "guerrier"){
-            $query="SELECT * FROM guerriers WHERE nom = :nom ";
-        }
+        $query="SELECT * FROM personnage WHERE nom = :nom ";
         
         //verifie si le nom existe
         try {
@@ -112,10 +108,9 @@ class Manage_personnage {
         catch (PDOException $e) {
             echo utf8_encode("Echec de select nom Ajout : " . $e->getMessage() . "\n");
         }		
-    
         
-        if(count($resultat) == 0) return false;
-        else return true;
+        if($resultat == NULL) return true;
+        else return false;
     }
 }
 
