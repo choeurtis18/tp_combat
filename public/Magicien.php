@@ -3,6 +3,10 @@
 class Magicien extends Personage {
     private int $mana;
 
+    function __construct($data){
+        $this->hydrate($data);
+    }
+
     public function dododo(Personage $p){
         
     }

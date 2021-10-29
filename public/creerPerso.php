@@ -28,7 +28,7 @@ else {
 
 $a = new Manage_personnage($db);
 $reponse = $a->getPersonnages();
-echo $response;
+//echo $response;
 
 
 ?>

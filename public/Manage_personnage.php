@@ -2,7 +2,8 @@
 
 spl_autoload_register(function($className){
     require $className.".php";
-});
+  });
+
 
 class Manage_personnage {
     private $db;
@@ -74,7 +75,6 @@ class Manage_personnage {
             var_dump($personnage);
             $personnages[] = $personnage;
         };
-        
         return $personnages;
     }
 
