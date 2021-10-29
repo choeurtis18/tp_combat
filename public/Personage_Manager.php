@@ -49,7 +49,7 @@ class Personage_Manager {
                 $req->bindValue(':attack', random_int(20, 40));
                 $req->bindValue(':defence', random_int(10, 19));
                 $req->bindValue(':typee', 'guerrier');
-                $req->bindValue(':sleep', date());
+                $req->bindValue(':sleep', date("Y-m-d H:i:s"));
 
                 
                 $req->execute();

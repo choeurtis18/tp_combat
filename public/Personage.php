@@ -25,9 +25,7 @@ class Personage{
 
         public function attack(Personage $p){
                 $sDate = date("Y-m-d H:i:s");
-                addTime($sDate, $p);
-                deleteTime($this->getSleep());
-                if((strtotime(date($this->getSleep())) + 15) < $sDate) {
+                if((strtotime(date($this->getSleep())) + 15) < strtotime($sDate)) {
                         if($this->getAttack() > $p->getDefence()){
                                 $p->setHp($p->getHp() - ($this->getAttack() - $p->getDefence()));
                         }

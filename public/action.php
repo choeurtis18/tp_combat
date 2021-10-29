@@ -25,7 +25,7 @@
     }elseif(htmlspecialchars($_GET["action"]) == "dodo"){
         //si les perso sont differents
         if( htmlspecialchars($_GET["id_attaque"]) != htmlspecialchars($_GET["id_defense"]) ) {
-            
+            $perso1->endormir($perso2);
             $url = "./InfosPerso.php?id=".$perso1->getID();
             header("Location: $url");
         } else{
@@ -34,38 +34,4 @@
         }
     }
 
-    function addTime($date, Personage $p) {
-        $db = new Dbconnexion();
-        $db = $db->connection();
-      
-        $query = "INSERT INTO `time` SET  `date` = :datee)";
-        $req = $db->prepare($query);
-      
-        $req->bindValue(':datee', $date);
-        $req->execute();
-        $p->setSleep(getTime());
-      }
-      
-      function getTime() {
-        $db = new Dbconnexion();
-        $db = $db->connection();
-      
-        $query = "SELECT `date` FROM `time`";
-      
-        $req = $db->prepare($query);
-        $req->execute();
-      
-        $row = $req->fetch(PDO::FETCH_ASSOC);
-      
-        return htmlspecialchars($row['date']);
-      
-      }
-      
-      function deleteTime($date) {
-        $db = new Dbconnexion();
-        $db = $db->connection();
-      
-        $query = "DELETE FROM `time` WHERE `date`= $date";
-      
-      }
 ?>

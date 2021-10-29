@@ -32,6 +32,7 @@ spl_autoload_register(function($className){
       <p>Points de Vie : <?php echo $personage->getHp();?></p>
       <p>Attaque : <?php echo $personage->getAttack();?></p>
       <p>Défense : <?php echo $personage->getDefence();?></p>
+      <p>sleep : <?php  echo $personage->getSleep();?></p>
     </div>
 
     <div>
