@@ -7,8 +7,16 @@ class Magicien extends Personage {
         $this->hydrate($data);
     }
 
-    public function dododo(Personage $p){
-        
+    public function endormir(Personage $p){
+        $sDate = date("Y-m-d H:i:s");
+        addTime($sDate, $p);
+        deleteTime($this->getSleep());
+        if((strtotime(date($this->getSleep())) + 120) > $sDate) {
+            return "Tu l'as déjà endormi il y a moins de 2 minutes. Attend encore un peu.";
+        }
+        else {
+
+        }
     }
     /**
      * Get the value of mana

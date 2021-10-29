@@ -7,6 +7,7 @@ class Personage{
         private int $attack;
         private int $defence;
         private string $type;
+        private string $sleep;
         //mana
 
         function __construct($data){
@@ -23,15 +24,24 @@ class Personage{
         }
 
         public function attack(Personage $p){
-                if($this->getAttack() > $p->getDefence()){
-                        $p->setHp($p->getHp() - ($this->getAttack() - $p->getDefence()));
+                $sDate = date("Y-m-d H:i:s");
+                addTime($sDate, $p);
+                deleteTime($this->getSleep());
+                if((strtotime(date($this->getSleep())) + 15) < $sDate) {
+                        if($this->getAttack() > $p->getDefence()){
+                                $p->setHp($p->getHp() - ($this->getAttack() - $p->getDefence()));
+                        }
+                        if($p->getHp() <= 0){
+                                $db = new Dbconnexion();
+                                $db = $db->connection();
+                                $a = new Personage_Manager($db);
+                                $a->deletePersonnage($p->getID());
+                        }
                 }
-                if($p->getHp() <= 0){
-                        $db = new Dbconnexion();
-                        $db = $db->connection();
-                        $a = new Personage_Manager($db);
-                        $a->deletePersonnage($p->getID());
-                }
+                else {
+                        return "Tu dors tu peux pas attaquer";
+                }        
+                       
         }
 
         
@@ -127,6 +137,26 @@ class Personage{
                 $this->type = $type;
                 return $this;
         }
+
+        /**
+         * Get the value of sleep
+         */ 
+        public function getSleep()
+        {
+                return $this->sleep;
+        }
+        /**
+         * Set the value of sleep
+         *
+         * @return  self
+         */ 
+        public function setSleep($sleep)
+        {
+                $this->sleep = $sleep;
+
+                return $this;
+        }
+
         
     }
 ?>
