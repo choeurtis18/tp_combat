@@ -25,5 +25,9 @@ else {
   echo "Veuillez remplir tous les champs";
 }
 
+$a = new Manage_personnage($db);
+$reponse = $a->getPersonnages();
+echo $response;
+
 
 ?>
