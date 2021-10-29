@@ -2,11 +2,14 @@
 
 class Dbconnexion{
 
-    private $db;
-
     public function connection() {
-        $this->db = new PDO("mysql:host=localhost;dbname=tp_combat", "root", "root");
-        return $this->db;
+        try {
+            $db = new PDO("mysql:host=db;dbname=tp_combat", "root", "password");
+            return $db;
+        } catch (Exception $e) {
+            die('Erreur : '.$e->getMessage());
+            return "error";
+        }
     }
 
     
