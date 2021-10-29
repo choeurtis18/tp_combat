@@ -5,7 +5,7 @@ spl_autoload_register(function($className){
 });
 
 
-class Manage_personnage {
+class Personage_Manager {
     private $db;
 
     public function __construct(PDO $db){
@@ -103,6 +103,7 @@ class Manage_personnage {
         $req = $db->prepare($query);
         $req->execute();
     }
+
     public function deletePersonnage($ID){
         /*** accès au model ***/
         $db = $this->db;

@@ -29,7 +29,7 @@ class Personage{
                 if($p->getHp() <= 0){
                         $db = new Dbconnexion();
                         $db = $db->connection();
-                        $a = new Manage_personnage($db);
+                        $a = new Personage_Manager($db);
                         $a->deletePersonnage($p->getID());
                 }
         }
@@ -39,26 +39,22 @@ class Personage{
         /**
          * Get the value of ID
          */ 
-        public function setID($ID)
-        {
+        public function setID($ID){
                 $this->ID = $ID;
-
                 return $this;
         }
 
         /**
          * Get the value of ID
          */ 
-        public function getID()
-        {
+        public function getID(){
                 return $this->ID;
         }
 
         /**
          * Get the value of hp
          */ 
-        public function getHp()
-        {
+        public function getHp(){
                 return $this->hp;
         }
 
@@ -67,18 +63,15 @@ class Personage{
          *
          * @return  self
          */ 
-        public function setHp($hp)
-        {
+        public function setHp($hp){
                 $this->hp = $hp;
-
                 return $this;
         }
 
         /**
          * Get the value of attak
          */ 
-        public function getAttack()
-        {
+        public function getAttack(){
                 return $this->attack;
         }
 
@@ -87,18 +80,15 @@ class Personage{
          *
          * @return  self
          */ 
-        public function setAttack($attack)
-        {
+        public function setAttack($attack){
                 $this->attack = $attack;
-
                 return $this;
         }
 
         /**
          * Get the value of defence
          */ 
-        public function getDefence()
-        {
+        public function getDefence(){
                 return $this->defence;
         }
 
@@ -107,10 +97,8 @@ class Personage{
          *
          * @return  self
          */ 
-        public function setDefence($defence)
-        {
+        public function setDefence($defence){
                 $this->defence = $defence;
-
                 return $this;
         }
 
@@ -118,8 +106,7 @@ class Personage{
         /**
          * Get the value of nom
          */ 
-        public function getNom()
-        {
+        public function getNom(){
                 return $this->nom;
         }
 
@@ -128,21 +115,16 @@ class Personage{
          *
          * @return  self
          */ 
-        public function setNom($nom)
-        {
+        public function setNom($nom){
                 $this->nom = $nom;
-
                 return $this;
         }
 
-        public function getType()
-        {
+        public function getType(){
                 return $this->type;
         }
-        public function setType($type)
-        {
+        public function setType($type){
                 $this->type = $type;
-
                 return $this;
         }
         

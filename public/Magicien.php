@@ -13,8 +13,7 @@ class Magicien extends Personage {
     /**
      * Get the value of mana
      */ 
-    public function getMana()
-    {
+    public function getMana(){
         return $this->mana;
     }
 
@@ -23,10 +22,8 @@ class Magicien extends Personage {
      *
      * @return  self
      */ 
-    public function setMana($mana)
-    {
+    public function setMana($mana){
         $this->mana = $mana;
-
         return $this;
     }
 }

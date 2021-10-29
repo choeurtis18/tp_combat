@@ -13,13 +13,15 @@ spl_autoload_register(function($className){
   <title>Document</title>
 </head>
 <body>
-    <h1><a href="./index.php">Retour menu</a></h1>
+    
   <div class="container">
+    <h1><a href="index.php">Retour menu</a></h1>
     <?php
       $id = htmlspecialchars($_GET["id"]);
       $db = new Dbconnexion();
       $db = $db->connection();
-      $a = new Manage_personnage($db);
+
+      $a = new Personage_Manager($db);
       $personage = $a->getPersonnage(intval($id));
     
     ?>
@@ -36,16 +38,17 @@ spl_autoload_register(function($className){
       <h2>Liste personnage</h2>
       <?php
         $db = new Dbconnexion();
-        $manage = new Manage_personnage($db->connection());
+        $manage = new Personage_Manager($db->connection());
+
         $personages = $manage->getPersonnages();
         foreach($personages as $perso) {
       ?>
-      <a href="./InfosPerso.php?id=<?php echo $perso->getID();?>" > <p><?php echo $perso->getNom();?> le <?php echo $perso->getType();?></p></a>
-      <a href="./action.php?action=attaquer&id_attaque=<?php echo $personage->getID();?>&id_defense=<?php echo $perso->getID();?>"><button name="attack">Attaquer</button></a>
+      <a href="InfosPerso.php?id=<?php echo $perso->getID();?>" > <p><?php echo $perso->getNom();?> le <?php echo $perso->getType();?></p></a>
+      <a href="action.php?action=attaquer&id_attaque=<?php echo $personage->getID();?>&id_defense=<?php echo $perso->getID();?>"><button name="attack">Attaquer</button></a>
       <?php
         if($personage->getType() == "magicien") {
       ?>
-      <button name="dodo">Endormir</button>
+      <a href="action.php?action=dodo&id_attaque=<?php echo $personage->getID();?>&id_defense=<?php echo $perso->getID();?>"><button name="dodo">Endormir</button></a>
       <?php
         }
       ?>

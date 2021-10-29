@@ -30,20 +30,25 @@ spl_autoload_register(function($className){
       </div>
       <button name="submit">Créer un personnage</button>
     </form>
-    
+    <div>
+      <h2>Liste personnage</h2>
+      <?php
+        //connection a la data base
+        $db = new Dbconnexion();
+        $manage = new Personage_Manager($db->connection());
+
+        //recuperer liste de personnage
+        $personages = $manage->getPersonnages();
+        if($personages != NULL) {
+          foreach($personages as $perso) {
+      ?>
+          <a href="InfosPerso.php?id=<?php echo $perso->getID();?>" > <p><?php echo $perso->getNom();?> le <?php echo $perso->getType();?></p></a>
+      <?php
+          }
+        }
+      ?>
+    </div>
   </div>
-  <div>
-    <h2>Liste personnage</h2>
-    <?php
-      $db = new Dbconnexion();
-      $manage = new Manage_personnage($db->connection());
-      $personages = $manage->getPersonnages();
-      foreach($personages as $perso) {
-    ?>
-    <a href="./InfosPerso.php?id=<?php echo $perso->getID();?>" > <p><?php echo $perso->getNom();?> le <?php echo $perso->getType();?></p></a>
-    <?php
-      }
-    ?>
-  </div>
+
 </body>
 </html>
