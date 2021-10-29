@@ -13,7 +13,7 @@
     <h1>Wizard VS Warrior</h1>
     <h2>Créez votre personnage !</h2>
 
-    <form action="index.php" method="POST">
+    <form action="InfosPerso.php" method="POST">
       <div class="step typeBtn">
         <label for="type">Spécifiez son type</label>
         <input type="radio" name="type" value="guerrier">Guerrier
@@ -22,6 +22,7 @@
       <div class="step">
         <label for="nomPerso">Donnez lui un nom</label>
         <input type="text" name="nomPerso">
+        <p><?php echo ($nomPersoErr);?></p>
       </div>
       <button name="submit">Créer un personnage</button>
     </form>
