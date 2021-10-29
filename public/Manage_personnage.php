@@ -2,7 +2,7 @@
 
 spl_autoload_register(function($className){
     require $className.".php";
-  });
+});
 
 
 class Manage_personnage {
@@ -95,6 +95,14 @@ class Manage_personnage {
         return $personnage;
     }
 
+    public function updatePersonnage($ID, $attr, $value) {
+        $p = $this->getPersonnage($ID);
+        $db = $this->db;
+
+        $query = "UPDATE `personnage` SET $attr = $value WHERE `personnage`.`id` = $ID";
+        $req = $db->prepare($query);
+        $req->execute();
+    }
     public function deletePersonnage($ID){
         /*** accès au model ***/
         $db = $this->db;
