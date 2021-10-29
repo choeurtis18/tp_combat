@@ -21,7 +21,7 @@ class Personage_Manager {
         $db = $this->db;
 
         if($type == "magicien"){
-            $query = "INSERT INTO `personnage` (`id`, `nom`, `hp`, `attack`, `defence`, `type`, `mana`) VALUES (NULL, :nom, :hp, :attack, :defence, :typee, :mana)";
+            $query = "INSERT INTO `personnage` (`id`, `nom`, `hp`, `attack`, `defence`, `type`, `sleep`, `mana`) VALUES (NULL, :nom, :hp, :attack, :defence, :typee, :sleep, :mana)";
             $req = $db->prepare($query);
         
             if(!$this->verifNom($nom)) {
@@ -30,6 +30,7 @@ class Personage_Manager {
                 $req->bindValue(':attack', random_int(5, 10));
                 $req->bindValue(':defence', 0);
                 $req->bindValue(':typee', 'magicien');
+                $req->bindValue(':sleep', date("Y-m-d H:i:s"));
                 $req->bindValue(':mana', random_int(15, 30));
 
                 
@@ -39,7 +40,7 @@ class Personage_Manager {
                 return "ce magicien existe déjà";
             }
         }elseif ($type == "guerrier"){
-            $query = "INSERT INTO `personnage` (`id`, `nom`, `hp`, `attack`, `defence`, `type`) VALUES (NULL, :nom, :hp, :attack, :defence, :typee)";
+            $query = "INSERT INTO `personnage` (`id`, `nom`, `hp`, `attack`, `defence`, `type`, `sleep`) VALUES (NULL, :nom, :hp, :attack, :defence, :typee, :sleep)";
             $req = $db->prepare($query);
         
             if(!$this->verifNom($nom)) {
@@ -48,6 +49,7 @@ class Personage_Manager {
                 $req->bindValue(':attack', random_int(20, 40));
                 $req->bindValue(':defence', random_int(10, 19));
                 $req->bindValue(':typee', 'guerrier');
+                $req->bindValue(':sleep', date("Y-m-d H:i:s"));
 
                 
                 $req->execute();

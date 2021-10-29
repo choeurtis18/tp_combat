@@ -25,7 +25,7 @@
     }elseif(htmlspecialchars($_GET["action"]) == "dodo"){
         //si les perso sont differents
         if( htmlspecialchars($_GET["id_attaque"]) != htmlspecialchars($_GET["id_defense"]) ) {
-            
+            $perso1->endormir($perso2);
             $url = "./InfosPerso.php?id=".$perso1->getID();
             header("Location: $url");
         } else{
@@ -33,4 +33,5 @@
             header("Location: $url");
         }
     }
+
 ?>
