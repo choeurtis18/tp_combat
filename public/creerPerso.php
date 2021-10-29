@@ -26,7 +26,6 @@ if (isset($nomPerso) && isset($type) && $nomPerso != "") {
   header("Location: $url");
 }
 else {
-  $nomPersoErr = "Veuillez remplir tous les champs";
   $url = './index.php';
   $param = 'error=Veuillez remplir tous les champs';
   $url = editURL_parameter($url, $param);

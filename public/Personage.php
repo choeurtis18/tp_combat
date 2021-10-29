@@ -24,6 +24,12 @@ class Personage{
 
         public function attack(Personage $p){
             $p->setHp($p->getHp() - ($this->getAttack() - $p->getDefence()));
+            if($p->getHp() <= 0){
+                $db = new Dbconnexion();
+                $db = $db->connection();
+                $a = new Manage_personnage($db);
+                $a->deletePersonnage($p->getID());
+            }
         }
 
         

@@ -1,3 +1,8 @@
+<?php 
+spl_autoload_register(function($className){
+  require $className.".php";
+});
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,8 +10,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
-  <?php include 'creerPerso.php'?>
-  <?php include 'Manage_personnage.php'?>
   <title>Document</title>
 </head>
 <body>
