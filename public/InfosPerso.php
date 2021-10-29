@@ -10,14 +10,43 @@
 </head>
 <body>
   <div class="container">
-    <h1><?php echo ($nomPerso) ?></h1>
-    <h2><?php echo ($type) ?></h2>
+    <?php
+      $id = htmlspecialchars($_GET["id"]);
+      $db = new Dbconnexion();
+      $db = $db->connection();
+      $a = new Manage_personnage($db);
+      $personage = $a->getPersonnage(intval($id));
+    
+    ?>
+    <h1><?php echo $personage->getNom();?></h1>
+    <h2><?php echo $personage->getType();?></h2>
     <div class="box">
-      <p>Points de Vie : </p>
-      <p>Attaque : </p>
-      <p>Défense : </p>
+      <p>Points de Vie : <?php echo $personage->getHp();?></p>
+      <p>Attaque : <?php echo $personage->getAttack();?></p>
+      <p>Défense : <?php echo $personage->getDefence();?></p>
     </div>
-    <button name="attack">Attaquer</button>
+
+    <div>
+      <h2>Liste personnage</h2>
+      <?php
+        $db = new Dbconnexion();
+        $manage = new Manage_personnage($db->connection());
+        $personages = $manage->getPersonnages();
+        foreach($personages as $perso) {
+      ?>
+      <a href="./InfosPerso.php?id=<?php echo $perso->getID();?>" > <p><?php echo $perso->getNom();?> le <?php echo $perso->getType();?></p></a>
+      <button name="attack">Attaquer</button>
+      <?php
+        if($personage->getType() == "magicien") {
+      ?>
+      <button name="dodo">Endormir</button>
+      <?php
+        }
+      ?>
+      <?php
+        }
+      ?>
+    </div>
   </div>
   
 </body>

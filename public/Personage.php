@@ -2,10 +2,11 @@
 
 class Personage{
         private int $ID;
-        private int $nom;
+        private string $nom;
         private int $hp;
         private int $attack;
         private int $defence;
+        private string $type;
         //mana
 
         function __construct($data){
@@ -125,5 +126,17 @@ class Personage{
 
                 return $this;
         }
+
+        public function getType()
+        {
+                return $this->type;
+        }
+        public function setType($type)
+        {
+                $this->type = $type;
+
+                return $this;
+        }
+        
     }
 ?>

@@ -72,18 +72,35 @@ class Manage_personnage {
             }elseif($row['type'] == "guerrier"){
                 $personnage = new Guerrier($row);
             }
-            var_dump($personnage);
             $personnages[] = $personnage;
         };
         return $personnages;
     }
 
+    public function getPersonnage($ID){
+        $db = $this->db;
+        $query = "SELECT * FROM `personnage` WHERE id = :ID";
+
+        $req = $db->prepare($query);
+        $req->bindValue(':ID', $ID, PDO::PARAM_INT);
+
+        $req->execute();
+        $row = $req->fetch(PDO::FETCH_ASSOC);
+        if($row['type'] == "magicien"){
+            $personnage = new Magicien($row);
+        }elseif($row['type'] == "guerrier"){
+            $personnage = new Guerrier($row);
+        }
+
+        return $personnage;
+    }
+
     public function deletePersonnage($ID){
         /*** accès au model ***/
-        $bdd = $this->bdd;
+        $db = $this->db;
         $query = "DELETE FROM personnage WHERE id = :ID";
 
-        $req = $bdd->prepare($query);
+        $req = $db->prepare($query);
         $req->bindValue(':ID', $ID, PDO::PARAM_INT);
 
         $req->execute();
@@ -101,7 +118,6 @@ class Manage_personnage {
             $bool = $req->execute();
             if ($bool) {
                 $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
-                var_dump($resultat);
             }
         }
         catch (PDOException $e) {
