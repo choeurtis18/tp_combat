@@ -2,7 +2,8 @@
 
 spl_autoload_register(function($className){
     require $className.".php";
-});
+  });
+
 
 class Manage_personnage {
     private $db;
@@ -23,7 +24,7 @@ class Manage_personnage {
             $query = "INSERT INTO `personnage` (`id`, `nom`, `hp`, `attack`, `defence`, `type`, `mana`) VALUES (NULL, :nom, :hp, :attack, :defence, :typee, :mana)";
             $req = $db->prepare($query);
         
-            if(!$this->verifNom($nom, $type)) {
+            if(!$this->verifNom($nom)) {
                 $req->bindValue(':nom', $nom);
                 $req->bindValue(':hp', 100);
                 $req->bindValue(':attack', random_int(5, 10));
@@ -41,7 +42,7 @@ class Manage_personnage {
             $query = "INSERT INTO `personnage` (`id`, `nom`, `hp`, `attack`, `defence`, `type`) VALUES (NULL, :nom, :hp, :attack, :defence, :typee)";
             $req = $db->prepare($query);
         
-            if(!$this->verifNom($nom, $type)) {
+            if(!$this->verifNom($nom)) {
                 $req->bindValue(':nom', $nom);
                 $req->bindValue(':hp', 100);
                 $req->bindValue(':attack', random_int(20, 40));
@@ -74,7 +75,6 @@ class Manage_personnage {
             var_dump($personnage);
             $personnages[] = $personnage;
         };
-        
         return $personnages;
     }
 
@@ -89,28 +89,28 @@ class Manage_personnage {
         $req->execute();
     }
 
-    function verifNom($nom, $type) {
+    function verifNom($nom) {
         /*** accès au model ***/
         $db = $this->db;
-        $query = "";
-        
         $query="SELECT * FROM personnage WHERE nom = :nom ";
         
         //verifie si le nom existe
         try {
             $req = $db->prepare($query);
-            $req->bindValue(':nom', $nom, PDO::PARAM_INT);
+            $req->bindValue(':nom', $nom);
             $bool = $req->execute();
             if ($bool) {
-                $resultat = $req->fetchAll(PDO::FETCH_ASSOC); 
+                $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
+                var_dump($resultat);
             }
         }
         catch (PDOException $e) {
             echo utf8_encode("Echec de select nom Ajout : " . $e->getMessage() . "\n");
         }		
+    
         
-        if($resultat == NULL) return true;
-        else return false;
+        if(count($resultat) == 0) return false;
+        else return true;
     }
 }
 

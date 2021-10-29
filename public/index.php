@@ -25,6 +25,7 @@
       </div>
       <button name="submit">Créer un personnage</button>
     </form>
+    
   </div>
 </body>
 </html>

@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 spl_autoload_register(function($className){
   require $className.".php";
 });
@@ -24,6 +25,10 @@ if (isset($nomPerso) && isset($type) && $nomPerso != "") {
 else {
   echo "Veuillez remplir tous les champs";
 }
+
+$a = new Manage_personnage($db);
+$reponse = $a->getPersonnages();
+//echo $response;
 
 
 ?>
